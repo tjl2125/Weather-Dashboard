@@ -1,7 +1,7 @@
 var city="";
 var searchCity = $("#search-city");
-var searchButton = $("#search-button");
-var clearButton = $("#clear-history");
+var searchButton = $("#search-btn");
+var clearButton = $("#clear-btn");
 var currentCity = $("#current-city");
 var currentTemperature = $("#temperature");
 var currentHumidty= $("#humidity");
@@ -90,10 +90,10 @@ function forecast(cityid){
             var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
             var humidity= response.list[((i+1)*8)-1].main.humidity;
         
-            $("#fDate"+i).html(date);
-            $("#fImg"+i).html("<img src="+iconurl+">");
-            $("#fTemp"+i).html(tempF+"&#8457");
-            $("#fHumidity"+i).html(humidity+"%");
+            $("#fdate"+i).html(date);
+            $("#fimg"+i).html("<img src="+iconurl+">");
+            $("#ftemp"+i).html(tempF+"&#8457");
+            $("#fhumidity"+i).html(humidity+"%");
         }
         
     })
@@ -139,10 +139,10 @@ function clearHistory(event){
 
 }
 //Click Handlers
-$("#search-button").on("click",displayWeather);
+$("#search-btn").on("click",displayWeather);
 $(document).on("click",invokePastSearch);
 $(window).on("load",loadlastCity);
-$("#clear-history").on("click",clearHistory);
+$("#clear-btn").on("click",clearHistory);
 
 
 
