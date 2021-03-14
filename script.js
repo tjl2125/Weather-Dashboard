@@ -48,13 +48,13 @@ function todayWeather(city){
                 sCity.push(city.toUpperCase()
                 );
                 localStorage.setItem("cityname",JSON.stringify(sCity));
-                addToList(city);
+                makeHistory(city);
             }
             else {
                 if(find(city)>0){
                     sCity.push(city.toUpperCase());
                     localStorage.setItem("cityname",JSON.stringify(sCity));
-                    addToList(city);
+                    makeHistory(city);
                 }
             }
         }
@@ -98,7 +98,7 @@ function forecast(cityid){
     })
 }
 
-function addToList(c){
+function makeHistory(c){
     var listEl= $("<li>"+c.toUpperCase()+"</li>");
     $(listEl).attr("class","history-list-item");
     $(listEl).attr("data-value",c.toUpperCase());
@@ -120,7 +120,7 @@ function loadlastCity(){
     if(sCity!==null){
         sCity=JSON.parse(localStorage.getItem("cityname"));
         for(i=0; i<sCity.length;i++){
-            addToList(sCity[i]);
+            makeHistory(sCity[i]);
         }
         city=sCity[i-1];
         todayWeather(city);
