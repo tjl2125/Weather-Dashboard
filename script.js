@@ -41,19 +41,19 @@ function todayWeather(city){
         UVIndex(response.coord.lon,response.coord.lat);
         forecast(response.id);
         if(response.cod==200){
-            sCity=JSON.parse(localStorage.getItem("cityname"));
+            sCity=JSON.parse(localStorage.getItem("city"));
             console.log(sCity);
             if (sCity==null){
                 sCity=[];
                 sCity.push(city.toUpperCase()
                 );
-                localStorage.setItem("cityname",JSON.stringify(sCity));
+                localStorage.setItem("city",JSON.stringify(sCity));
                 makeHistory(city);
             }
             else {
                 if(find(city)>0){
                     sCity.push(city.toUpperCase());
-                    localStorage.setItem("cityname",JSON.stringify(sCity));
+                    localStorage.setItem("city",JSON.stringify(sCity));
                     makeHistory(city);
                 }
             }
@@ -105,7 +105,7 @@ function makeHistory(c){
     $(".history-list").append(listEl);
 }
 
-function showPastSearch(event){
+function showPrevSearch(event){
     var liEl=event.target;
     if (event.target.matches("li")){
         city=liEl.textContent.trim();
@@ -114,11 +114,11 @@ function showPastSearch(event){
 
 }
 
-function loadlastCity(){
+function loadprevCity(){
     $("ul").empty();
-    var sCity = JSON.parse(localStorage.getItem("cityname"));
+    var sCity = JSON.parse(localStorage.getItem("city"));
     if(sCity!==null){
-        sCity=JSON.parse(localStorage.getItem("cityname"));
+        sCity=JSON.parse(localStorage.getItem("city"));
         for(i=0; i<sCity.length;i++){
             makeHistory(sCity[i]);
         }
@@ -131,12 +131,12 @@ function loadlastCity(){
 function clearHistory(event){
     event.preventDefault();
     sCity=[];
-    localStorage.removeItem("cityname");
+    localStorage.removeItem("city");
     document.location.reload();
 
 }
 
 $("#search-btn").on("click",showWeather);
-$(document).on("click",showPastSearch);
-$(window).on("load",loadlastCity);
+$(document).on("click",showPrevSearch);
+$(window).on("load",loadprevCity);
 $("#clear-btn").on("click",clearHistory);
