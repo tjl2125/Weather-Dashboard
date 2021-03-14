@@ -28,8 +28,8 @@ function todayWeather(city){
     }).then(function(response){
  
         console.log(response);
-        var weathericon= response.weather[0].icon;
-        var iconurl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
+        var wIcon= response.weather[0].icon;
+        var iconurl="https://openweathermap.org/img/wn/"+wIcon +"@2x.png";
         var date=new Date(response.dt*1000).toLocaleDateString();
         $(currentCity).html(response.name +"("+date+")" + "<img src="+iconurl+">");
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
@@ -105,7 +105,7 @@ function makeHistory(c){
     $(".history-list").append(listEl);
 }
 
-function invokePastSearch(event){
+function showPastSearch(event){
     var liEl=event.target;
     if (event.target.matches("li")){
         city=liEl.textContent.trim();
@@ -137,6 +137,6 @@ function clearHistory(event){
 }
 
 $("#search-btn").on("click",showWeather);
-$(document).on("click",invokePastSearch);
+$(document).on("click",showPastSearch);
 $(window).on("load",loadlastCity);
 $("#clear-btn").on("click",clearHistory);
